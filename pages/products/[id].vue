@@ -1,7 +1,7 @@
 <template>
   <div>
     <Head>
-      <Title>Nuxt Dojo | {{ product.title }}</Title>
+      <Title>Shoppie | {{ product.title }}</Title>
       <Meta name="description" :content="product.description"/>
     </Head>
     <div v-if="product">
