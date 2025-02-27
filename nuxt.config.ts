@@ -17,12 +17,17 @@ export default defineNuxtConfig({
   // App configuration
   app: {
     head: {
-      title: "Nuxt Dojo",
+      title: "Shoppie",
       meta: [{ name: "description", content: "Nuxt Dojo Merchandise Store" }],
       link: [
         {
           rel: "stylesheet",
           href: "https://fonts.googleapis.com/icon?family=Material+Icons",
+        },
+        {
+          rel: "icon",
+          type: "image/svg+xml",
+          href: "/images/shopee.svg",
         },
       ],
     },
