@@ -1,12 +1,14 @@
 <template>
   <div>
+    <Head>
+      <Title>Nuxt Dojo | {{ product.title }}</Title>
+      <Meta name="description" :content="product.description"/>
+    </Head>
     <div v-if="product">
-      <p>{{ product.title }}</p>
-      <p>{{ product.price }}</p>
-      <p>{{ product.id }}</p>
+      <ProductDetails :product="product" />
     </div>
-    <div v-else>
-      <p>Loading product...</p>
+    <div v-else-if="pending">
+      Loading product...
     </div>
   </div>
 </template>
@@ -15,19 +17,19 @@
 const { id } = useRoute().params
 const uri = 'https://fakestoreapi.com/products/' + id
 
-// Add proper error handling and loading state
-const { data: product, error } = await useFetch(uri, { key: id })
+// Add the pending state to show loading indicator
+const { data: product, pending, error } = await useFetch(uri, { key: id })
 
-// Define page metadata with error handling
+// Only throw error if we've finished loading and there's no product
+if (!pending.value && !product.value) {
+  throw createError({
+    statusCode: 404,
+    statusMessage: 'Product Not Found',
+    fatal: true
+  })
+}
+
 definePageMeta({
   layout: 'products'
 })
-
-// Handle the error if the fetch fails
-if (error.value) {
-  console.error('Failed to fetch product:', error.value)
-}
 </script>
-
-<style scoped>
-</style>

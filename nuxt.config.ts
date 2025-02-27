@@ -3,7 +3,7 @@ export default defineNuxtConfig({
   modules: ["@nuxtjs/tailwindcss"],
   compatibilityDate: "2025-02-26",
 
-  // Add CSS file path
+  // CSS file path
   css: ["~/assets/css/tailwind.css"],
 
   // Ensure app directory is watched for changes
@@ -11,19 +11,25 @@ export default defineNuxtConfig({
 
   // Configure tailwind module
   tailwindcss: {
-    // This setting isn't required but can help if you're experiencing issues
     exposeConfig: true,
-    // If you need to customize the config location:
-    // configPath: '~/tailwind.config.js',
-    // If you need to enable viewer:
-    // viewer: true,
   },
 
-  // Configure error handling for better debugging
+  // App configuration
   app: {
     head: {
-      title: "Nuxt Dojo Merch",
+      title: "Nuxt Dojo",
       meta: [{ name: "description", content: "Nuxt Dojo Merchandise Store" }],
+      link: [
+        {
+          rel: "stylesheet",
+          href: "https://fonts.googleapis.com/icon?family=Material+Icons",
+        },
+      ],
     },
+  },
+
+  // Runtime config should be at the top level, not inside app
+  runtimeConfig: {
+    currencyKey: process.env.CURRENCY_API_KEY,
   },
 });
